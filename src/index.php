@@ -2,18 +2,27 @@
 
 declare(strict_types=1);
 
-use Src\EventDispatcher;
+use Src\AsyncEventDispatcher;
+use Src\SyncEventDispatcher;
 use Src\Events\UserRegisteredEvent;
 use Src\ListenerProvider;
 use Src\Listeners\SendWelcomeEmailListener;
+use Src\RabbitMQQueue;
+use Src\InMemoryQueue;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
 $listerProvider = new ListenerProvider();
 $listerProvider->addListener(UserRegisteredEvent::class, new SendWelcomeEmailListener);
 
-$eventDispatcher = new EventDispatcher(
+$eventDispatcher = new SyncEventDispatcher(
     provider: $listerProvider
+);
+
+//$queue = new InMemoryQueue;
+$queue = new RabbitMQQueue;
+$eventDispatcher = new AsyncEventDispatcher(
+    queue: $queue
 );
 
 $eventDispatcher->dispatch(

@@ -5,3 +5,16 @@ services:
       dockerfile: php.Dockerfile
     volumes:
       - ../:/var/www
+
+  rabbitmq:
+    build:
+      context: .
+      dockerfile: rabbitmq.Dockerfile 
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
+      RABBITMQ_DEFAULT_USER: "admin"
+      RABBITMQ_DEFAULT_PASS: "password"
+      RABBITMQ_DEFAULT_VHOST: "/"

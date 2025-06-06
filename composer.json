@@ -34,6 +34,7 @@
         "test:coverage": "./vendor/bin/pest --coverage"
     },
     "require": {
-        "psr/event-dispatcher": "^1.0"
+        "psr/event-dispatcher": "^1.0",
+        "php-amqplib/php-amqplib": "^3.7"
     }
 }

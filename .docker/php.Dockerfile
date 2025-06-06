@@ -16,7 +16,7 @@ RUN apk add --update linux-headers --no-cache \
     make \
     libzip-dev \
     oniguruma-dev \
-    # && docker-php-ext-install pdo_mysql mbstring zip opcache \
+    && docker-php-ext-install bcmath sockets \
     && pecl install xdebug \
     && docker-php-ext-enable xdebug \
     && echo "xdebug.mode=coverage" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
